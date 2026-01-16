@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.insights.ingestion.dto.GitHubRepositoryDto;
+
 @Component
 public class GitHubClient {
     private final RestTemplate restTemplate = new RestTemplate();
@@ -18,7 +20,7 @@ public class GitHubClient {
     @Value("${github.api.token:}")
     private String token;
 
-    public ResponseEntity<String> getRepositories(String org){
+    public GitHubRepositoryDto[] getRepositories(String org){
         HttpHeaders headers = new HttpHeaders();
 
         headers.set("Accept", "application/vnd.github+json");
@@ -29,11 +31,13 @@ public class GitHubClient {
 
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-        return restTemplate.exchange(
+        ResponseEntity<GitHubRepositoryDto[]> response = restTemplate.exchange(
             baseUrl + "/orgs/" + org + "/repos",
             HttpMethod.GET,
             entity,
-            String.class
+            GitHubRepositoryDto[].class
         );
+
+        return response.getBody();
     }
 }
