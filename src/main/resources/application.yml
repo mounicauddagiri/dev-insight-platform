@@ -11,3 +11,8 @@ spring:
 
 server:
   port: 8080
+
+github:
+  api:
+    base-url: https://api.github.com
+    token: ""
