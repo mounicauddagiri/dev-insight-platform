@@ -1,11 +1,11 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/insights
-    username: insights
-    password: insights
+  # datasource:
+  #   url: jdbc:postgresql://localhost:5432/insights
+  #   username: insights
+  #   password: insights
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: false
     open-in-view: false
 
