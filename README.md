@@ -31,3 +31,9 @@ This project demonstrates how to design a centralized backend service that:
 - Rate-limit handling & backoff
 - Async ingestion via queues
 - Repository metrics aggregation
+
+## Why this project
+
+This project simulates a backend ingestion platform similar to systems used
+by developer tooling companies to aggregate repository metadata, apply
+rate-limit-aware ingestion, and persist data using migration-driven schemas.

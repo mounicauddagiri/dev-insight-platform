@@ -38,6 +38,19 @@ public class GitHubClient {
             GitHubRepositoryDto[].class
         );
 
+        handleRateLimiting(response.getHeaders());
+
         return response.getBody();
+    }
+
+    private void handleRateLimiting(HttpHeaders headers) {
+        var remaining = headers.getFirst("X-RateLimit-Remaining");
+        var reset = headers.getFirst("X-RateLimit-Reset");
+
+        if (remaining != null && Integer.parseInt(remaining) < 10) {
+            throw new GitHubRateLimitException(
+                "GitHub rate limit nearly exhausted. Resets at epoch " + reset
+            );
+        }
     }
 }

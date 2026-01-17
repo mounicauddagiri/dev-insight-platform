@@ -17,8 +17,11 @@ public class GitHubIngestionScheduler  {
 
     @Scheduled(fixedDelayString = "PT10M")
     public void ingest() {
-        log.info("Running GitHub ingestion job...");
-        int saved = service.ingestOrgRepositories("github");
-        log.info("Ingestion completed — {} new repositories saved", saved);
+        try{
+            int saved = service.ingestOrgRepositories("github");
+            log.info("Saved {} new repositories from GitHub organization 'github'", saved);
+        } catch (GitHubRateLimitException e) {
+            log.warn("GitHub rate limit reached during scheduled ingestion: {}", e.getMessage());
+        }
     }
 }
