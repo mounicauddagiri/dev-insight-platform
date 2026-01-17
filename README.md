@@ -1,7 +1,15 @@
 # dev-insight-platform
-# GitHub Developer Insights Platform
 
+Backend ingestion platform that aggregates GitHub repository metadata using scheduled, rate-limit-aware jobs and persists results with Flyway-managed PostgreSQL schemas.
 A backend-heavy internal platform that aggregates GitHub CI/CD and repository data into stable, versioned APIs for engineering visibility and developer tooling.
+
+## Key Features
+- GitHub REST API integration with rate-limit awareness
+- Scheduled ingestion jobs
+- DTO → domain mapping with idempotent persistence
+- PostgreSQL with Flyway-managed schema migrations
+- Clean layered architecture (API → Service → Ingestion → Domain)
+- Metrics endpoints for operational visibility
 
 ## Problem
 Engineering teams often rely directly on GitHub APIs or ad-hoc scripts to understand build health, failures, and trends. This leads to duplicated logic, unstable integrations, and poor scalability.
