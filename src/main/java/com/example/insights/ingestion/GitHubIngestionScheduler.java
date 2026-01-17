@@ -9,20 +9,16 @@ import org.springframework.stereotype.Component;
 public class GitHubIngestionScheduler  {
     private static final Logger log = LoggerFactory.getLogger(GitHubIngestionScheduler.class);
 
-    private final GitHubClient client;
+    private final GitHubIngestionService service;
 
-    public GitHubIngestionScheduler(GitHubClient client) {
-        this.client = client;
+    public GitHubIngestionScheduler(GitHubIngestionService service) {
+        this.service = service;
     }
 
     @Scheduled(fixedDelayString = "PT10M")
     public void ingest() {
         log.info("Running GitHub ingestion job...");
-        try {
-            var repos = client.getRepositories("github");
-            log.info("Fetched {} repositories", repos.length);
-        } catch (Exception e) {
-            log.error("Failed to fetch repositories", e);
-        }
+        var repos = service.fetchOrgRepositories("github");
+        log.info("Fetched {} repositories", repos.length);
     }
 }

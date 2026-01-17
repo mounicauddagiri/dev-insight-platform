@@ -17,4 +17,17 @@ This project demonstrates how to design a centralized backend service that:
 - Backend services consuming engineering metrics
 - Internal dashboards and reporting tools
 
-## Architecture Overview
+## Architecture
+
+- Spring Boot 3 / Java 17
+- Layered architecture (API → Service → Ingestion → Domain)
+- Scheduled ingestion jobs
+- GitHub REST API integration
+- PostgreSQL (Flyway-managed migrations)
+
+## Future Work
+
+- Persist ingestion results
+- Rate-limit handling & backoff
+- Async ingestion via queues
+- Repository metrics aggregation
