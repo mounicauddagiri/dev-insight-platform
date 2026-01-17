@@ -18,7 +18,7 @@ public class GitHubIngestionScheduler  {
     @Scheduled(fixedDelayString = "PT10M")
     public void ingest() {
         log.info("Running GitHub ingestion job...");
-        var repos = service.fetchOrgRepositories("github");
-        log.info("Fetched {} repositories", repos.length);
+        int saved = service.ingestOrgRepositories("github");
+        log.info("Ingestion completed — {} new repositories saved", saved);
     }
 }

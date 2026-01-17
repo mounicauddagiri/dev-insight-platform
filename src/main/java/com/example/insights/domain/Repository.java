@@ -7,10 +7,13 @@ import jakarta.persistence.*;
 public class Repository {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(name = "html_url", nullable = false)
     private String htmlUrl;
 
     private String description;

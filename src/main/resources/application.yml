@@ -1,13 +1,18 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/insights
+    url: jdbc:postgresql://localhost:5432/dev_insights
     username: dev
     password: dev
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: validate
     show-sql: false
     open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
 
 server:
   port: 8080
@@ -16,3 +21,6 @@ github:
   api:
     base-url: https://api.github.com
     token: ""
+
+flyway:
+    enabled: true
